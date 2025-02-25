@@ -4,7 +4,7 @@
     <title>Membership Form test</title>
 </head>
 <body>
-    <h1>Membership Registration TEst</h1>
+    <h1>Membership Registration test</h1>
     <form id="membershipForm" method = "POST">
         <label for="slackId">Slack ID:</label>
         <input type="text" id="slackId" name="slackId"><br><br>
@@ -30,8 +30,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ slackId, membershipType }),
-                    mode: 'no-cors' // Add this line
+                    body: JSON.stringify({ slackId, membershipType })
                 });
 
                 const data = await response.json();
