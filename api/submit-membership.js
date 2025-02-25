@@ -1,10 +1,11 @@
-const cors = require('cors');
-app.use(cors()); // Add this line to enable CORS for all origins
-
 const { MongoClient } = require('mongodb');
+const cors = require('cors'); // Import the cors package
 require('dotenv').config();
 
 module.exports = async (req, res) => {
+  // Enable CORS for all origins
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
   if (req.method!== 'POST') {
     return res.status(405).end(); // Method Not Allowed
   }
