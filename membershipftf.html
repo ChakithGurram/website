@@ -125,14 +125,44 @@
 </div>
 
 <script>
-    // MetaMask connection function (No changes needed here)
+    // MetaMask connection function
     async function connectWallet() {
-        // ... (Your existing MetaMask connection code)
+        if (window.ethereum) {
+            try {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send("eth_requestAccounts",);
+                const signer = provider.getSigner();
+                const walletAddress = await signer.getAddress();
+                document.getElementById('wallet-address').innerText = `Connected Wallet Address: ${walletAddress}`;
+            } catch (error) {
+                alert("Error connecting to MetaMask.");
+            }
+        } else {
+            alert("MetaMask is not installed. Please install MetaMask.");
+        }
     }
 
-    // Show payment info based on membership (No changes needed here)
+    // Show payment info based on membership
     const membershipOptions = document.querySelectorAll('input[name="membership"]');
-    // ... (Your existing payment info display logic)
+    const paymentInfo = document.getElementById('payment-info');
+    const professionalPayment = document.getElementById('professional-payment');
+    const elitePayment = document.getElementById('elite-payment');
+
+    membershipOptions.forEach(option => {
+        option.addEventListener('change', function() {
+            if (this.value === 'professional') {
+                paymentInfo.style.display = 'block';
+                professionalPayment.style.display = 'block';
+                elitePayment.style.display = 'none';
+            } else if (this.value === 'elite') {
+                paymentInfo.style.display = 'block';
+                professionalPayment.style.display = 'none';
+                elitePayment.style.display = 'block';
+            } else {
+                paymentInfo.style.display = 'none';
+            }
+        });
+    });
 
     document.getElementById("registration-form").onsubmit = async function (event) {
         event.preventDefault();
