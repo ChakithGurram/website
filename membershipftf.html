@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuretech Foundation Membership</title>
+    <style>
+        /* Inline CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            max-width: 900px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input[type="text"], input[type="radio"] {
+            margin: 5px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        fieldset {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.4.0/dist/ethers.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Futuretech Foundation Membership Portal</h1>
+
+    <p>Welcome to the Futuretech Foundation Membership Portal! Please fill out the form below to complete your membership registration and access your account. If you're a returning member, please log in using MetaMask to view or update your profile.</p>
+
+    <h2>New Member Registration</h2>
+
+    <form id="registration-form" action="https://ftfdbtest.vercel.app/api/submit-membershipftf" method="POST">
+        <fieldset>
+            <legend>Slack Handle</legend>
+            <label for="slack-handle">Your Slack Handle:</label>
+            <input type="text" id="slack-handle" name="slack_handle" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Select Your Membership Tier</legend>
+            <label for="basic">
+                <input type="radio" id="basic" name="membership" value="basic" required>
+                Basic Member (Free)
+            </label>
+            <label for="professional">
+                <input type="radio" id="professional" name="membership" value="professional">
+                Professional Member ($50/year)
+            </label>
+            <label for="elite">
+                <input type="radio" id="elite" name="membership" value="elite">
+                Elite Member ($100/year)
+            </label>
+        </fieldset>
+
+        <fieldset id="payment-info" style="display:none;">
+            <legend>Payment Information</legend>
+            <div id="professional-payment" style="display:none;">
+                <p>Use this payment link for Professional Membership:</p>
+                <a href="https://nowpayments.io/payment/?iid=4387220382" target="_blank" rel="noreferrer noopener">
+                    <img src="https://nowpayments.io/images/embeds/payment-button-black.svg" alt="Crypto payment button by NOWPayments">
+                </a>
+            </div>
+            <div id="elite-payment" style="display:none;">
+                <p>Use this payment link for Elite Membership:</p>
+                <a href="https://nowpayments.io/payment/?iid=4683460567" target="_blank" rel="noreferrer noopener">
+                    <img src="https://nowpayments.io/images/embeds/payment-button-black.svg" alt="Crypto payment button by NOWPayments">
+                </a>
+            </div>
+        </fieldset>
+
+        <button type="submit">Submit Membership</button>
+    </form>
+
+    <h2>Existing Member Login (Via MetaMask)</h2>
+    <button id="connect-wallet" onclick="connectWallet()">Connect with MetaMask</button>
+    <p id="wallet-address"></p>
+
+    <p>Need Help? Contact us at <a href="mailto:futuretechfoundationX@gmail.com">futuretechfoundationX@gmail.com</a>.</p>
+</div>
+
+<script>
+    // MetaMask connection function (No changes needed here)
+    async function connectWallet() {
+        // ... (Your existing MetaMask connection code)
+    }
+
+    // Show payment info based on membership (No changes needed here)
+    const membershipOptions = document.querySelectorAll('input[name="membership"]');
+    // ... (Your existing payment info display logic)
+
+    document.getElementById("registration-form").onsubmit = async function (event) {
+        event.preventDefault();
+
+        const slackHandle = document.getElementById("slack-handle").value;
+        const membership = document.querySelector('input[name="membership"]:checked').value;
+
+        try {
+            const response = await fetch("https://ftfdbtest.vercel.app/api/submit-membershipftf", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ slack_handle: slackHandle, membership: membership }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert(result.message);
+            } else {
+                alert(result.error);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Something went wrong. Please try again.");
+        }
+    };
+</script>
+
+</body>
+</html>
