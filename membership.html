@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Membership Form</title>
+</head>
+<body>
+    <h1>Membership Registration</h1>
+    <form id="membershipForm">
+        <label for="slackId">Slack ID:</label>
+        <input type="text" id="slackId" name="slackId"><br><br>
+
+        <label>Membership Type:</label><br>
+        <input type="radio" id="free" name="membershipType" value="free">
+        <label for="free">Free Membership</label><br>
+
+        <input type="radio" id="professional" name="membershipType" value="professional">
+        <label for="professional">Professional Membership</label><br><br>
+
+        <button type="button" onclick="submitMembership()">Submit Membership</button>
+    </form>
+
+    <script>
+        async function submitMembership() {
+            const slackId = document.getElementById('slackId').value;
+            const membershipType = document.querySelector('input[name="membershipType"]:checked').value;
+
+            try {
+                const response = await fetch('YOUR_VERCEL_API_URL/api/submit-membership', { // Replace with your Vercel URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ slackId, membershipType })
+                });
+
+                const data = await response.json();
+                alert(data.message); // Show success or error message
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
