@@ -1,0 +1,24 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChakithGurram/website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChakithGurram/website/issues"
+  },
+  "homepage": "https://github.com/ChakithGurram/website#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "mongodb": "^6.13.1"
+  }
+}
