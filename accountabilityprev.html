@@ -71,6 +71,19 @@
             color: white; /* Ensure the heading text is also white */
         }
 
+        .category-header .dropdown-icon {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 10px solid white; /* Color of the arrow */
+            transition: transform 0.5s ease-in-out; /* Increased duration for smoother rotation */
+        }
+
+        .category-header.expanded .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
         .category-content {
             padding: 16px;
             border-top: 1px solid #e0e0e0;
@@ -154,6 +167,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>1. Governance & Leadership Transparency</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>Our leadership team and Board of Directors are committed to open and transparent decision-making processes.</p>
@@ -168,6 +182,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>2. Financial Accountability</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>We are committed to providing clear and accessible information about our financial activities.</p>
@@ -182,6 +197,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>3. Data Privacy & Security</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>Protecting the privacy and security of our stakeholders' data is paramount.</p>
@@ -196,6 +212,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>4. Stakeholder Engagement</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>We value feedback and actively engage with our stakeholders to improve our programs and impact.</p>
@@ -210,6 +227,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>5. Ethical Standards & Compliance</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>We adhere to the highest ethical standards and all applicable regulations.</p>
@@ -224,6 +242,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>6. Program Evaluation & Impact Measurement</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>We rigorously evaluate our programs to understand their impact and identify areas for improvement.</p>
@@ -238,6 +257,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>7. Volunteer and Staff Accountability</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>We ensure our team members are well-trained, aligned with our mission, and held accountable for their roles.</p>
@@ -252,6 +272,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>8. Transparency in Partnerships</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>We carefully select partners who share our commitment to accountability and transparency.</p>
@@ -266,6 +287,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>9. Environmental Responsibility</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>We are committed to sustainable practices and minimizing our environmental footprint.</p>
@@ -280,6 +302,7 @@
         <section class="category-block">
             <div class="category-header">
                 <h3>10. Innovation & Continuous Improvement</h3>
+                <div class="dropdown-icon"></div>
             </div>
             <div class="category-content">
                 <p>We are dedicated to learning and continuously improving our policies and practices.</p>
@@ -305,13 +328,15 @@
     </footer>
 
     <script>
-        // Basic JavaScript to toggle the display of category content
+        // Basic JavaScript to toggle the display of category content and rotate the icon
         document.addEventListener('DOMContentLoaded', function() {
             const categoryHeaders = document.querySelectorAll('.category-header');
 
             categoryHeaders.forEach(header => {
                 header.addEventListener('click', function() {
                     const content = this.nextElementSibling;
+                    const icon = this.querySelector('.dropdown-icon');
+                    this.classList.toggle('expanded'); // Add/remove 'expanded' class to the header
                     if (content.style.display === 'block') {
                         content.style.display = 'none';
                     } else {
