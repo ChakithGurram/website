@@ -1,350 +1,301 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accountability & Transparency - FutureTech Foundation</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3f3f3;
-            color: #333;
-            line-height: 1.6;
-        }
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Accountability & Transparency - FutureTech Foundation</title>
+            <style>
+                body {
+                    font-family: 'Roboto', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #f8f9fa; /* Lighter background */
+                    color: #495057; /* Slightly darker text */
+                    line-height: 1.6;
+                }
 
-        header {
-            background-color: #3f51b5;
-            color: white;
-            padding: 24px 0;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+                header {
+                    background-color: #343a40; /* Darker header background */
+                    color: white;
+                    padding: 30px 0; /* More padding */
+                    text-align: center;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+                }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.2rem;
-            font-weight: 400;
-        }
+                header h1 {
+                    margin: 0 0 8px 0; /* Add some bottom margin */
+                    font-size: 2.5rem; /* Slightly larger font */
+                    font-weight: 500; /* Slightly bolder */
+                }
 
-        header p {
-            font-size: 1.1rem;
-            margin-top: 8px;
-        }
+                header p {
+                    font-size: 1.2rem; /* Slightly larger */
+                    margin-top: 0; /* Remove default top margin */
+                    color: #eee; /* Lighter text color */
+                }
 
-        main {
-            max-width: 960px;
-            margin: 32px auto;
-            padding: 24px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+                main {
+                    max-width: 1000px; /* थोड़ा बड़ा मैक्स-विड्थ */
+                    margin: 40px auto; /* More top/bottom margin */
+                    padding: 30px; /* More padding inside */
+                    background-color: white;
+                    border-radius: 10px; /* More rounded corners */
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+                }
 
-        .category-block {
-            margin-bottom: 24px;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden; /* To contain rounded borders of header */
-        }
+                /* Tab Navigation */
+                .tab-nav {
+                    display: flex;
+                    border-bottom: 2px solid #e0e0e0; /* Match the image more closely */
+                    margin-bottom: 24px;
+                    background-color: #f9f9f9; /* Light gray background for tabs */
+                    border-radius: 6px 6px 0 0;
+                }
 
-        .category-header {
-            background-color: #800020; /* Your provided color (a shade of maroon) */
-            color: white; /* Ensure text is readable against the dark background */
-            padding: 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 500;
-            transition: background-color 0.3s ease; /* Optional: for a subtle hover effect */
-        }
+                .tab-button {
+                    flex: 1; /* Distribute equal space */
+                    background: none;
+                    border: none;
+                    padding: 12px 16px;
+                    cursor: pointer;
+                    font-size: 0.9rem; /* Slightly smaller text for better fit */
+                    color: #555;
+                    font-weight: 500;
+                    transition: color 0.3s ease, border-bottom 0.3s ease;
+                    display: flex;
+                    flex-direction: column; /* Stack icon and text vertically */
+                    align-items: center; /* Center horizontally */
+                    justify-content: center; /* Center content vertically */
+                    gap: 4px; /* Space between icon and text */
+                    border-bottom: 2px solid transparent;
+                    border-radius: 4px 4px 0 0;
+                    text-align: center; /* Center the text */
+                    white-space: nowrap; /* Prevent text from wrapping */
+                }
 
-        .category-header:hover {
-            background-color: #a30830; /* A slightly lighter shade for hover feedback */
-        }
+                .tab-button > * {
+                    display: block; /* Ensure icon and text are block-level */
+                    width: 100%; /* Take full width of the button */
+                }
 
-        .category-header h3 {
-            margin: 0;
-            font-size: 1.4rem;
-            color: white; /* Ensure the heading text is also white */
-        }
+                .tab-button:hover {
+                    color: #3f51b5;
+                    background-color: #eee;
+                }
 
-        .category-header .dropdown-icon {
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 10px solid white; /* Color of the arrow */
-            transition: transform 0.5s ease-in-out; /* Increased duration for smoother rotation */
-        }
+                .tab-button.active {
+                    color: #3f51b5;
+                    border-bottom: 2px solid #3f51b5;
+                }
 
-        .category-header.expanded .dropdown-icon {
-            transform: rotate(180deg);
-        }
+                /* Tab Content */
+                .tab-content {
+                    display: none; /* Initially hide all content */
+                    padding: 20px 0; /* More padding */
+                }
 
-        .category-content {
-            padding: 16px;
-            border-top: 1px solid #e0e0e0;
-            display: none; /* Hide the content by default */
-        }
+                .tab-content.active {
+                    display: block; /* Show the active tab's content */
+                }
 
-        .category-content p {
-            margin-bottom: 16px;
-        }
+                .section-intro {
+                    color: #6c757d; /* Slightly lighter intro text */
+                    margin-bottom: 20px; /* More bottom margin */
+                    line-height: 1.7;
+                }
 
-        .category-content ul {
-            list-style-type: none;
-            padding-left: 0;
-            margin-bottom: 16px;
-        }
+                .policy-list {
+                    list-style-type: disc;
+                    margin-left: 25px; /* More left margin for list */
+                    margin-bottom: 25px; /* More bottom margin for list */
+                    color: #555;
+                }
 
-        .category-content ul li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-            color: #555;
-        }
+                .policy-list li {
+                    padding: 8px 0; /* More padding for list items */
+                    line-height: 1.6;
+                }
 
-        .category-content ul li:last-child {
-            border-bottom: none;
-        }
+                .cta {
+                    display: inline-block;
+                    margin-top: 40px; /* More top margin */
+                    padding: 14px 28px; /* More padding for button */
+                    background-color: #007bff; /* Primary blue */
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 6px; /* More rounded corners */
+                    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+                    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+                }
 
-        .cta {
-            display: inline-block;
-            margin-top: 24px;
-            padding: 12px 24px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-        }
+                .cta:hover {
+                    background-color: #0056b3;
+                    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.15);
+                }
 
-        .cta:hover {
-            background-color: #0056b3;
-        }
+                footer {
+                    text-align: center;
+                    padding: 30px 0; /* More padding */
+                    background-color: #f8f9fa; /* Lighter footer background */
+                    color: #6c757d;
+                    border-top: 1px solid #dee2e6; /* Lighter border */
+                    margin-top: 40px; /* Add some top margin */
+                }
 
-        footer {
-            text-align: center;
-            padding: 24px 0;
-            background-color: #f9f9f9;
-            color: #777;
-            border-top: 1px solid #eee;
-        }
+                .footer-links {
+                    display: flex;
+                    justify-content: center;
+                    gap: 20px; /* More gap between links */
+                    margin-top: 15px; /* More top margin */
+                }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 12px;
-        }
+                .footer-links a {
+                    color: #495057;
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                }
 
-        .footer-links a {
-            color: #555;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+                .footer-links a:hover {
+                    color: #007bff;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        </head>
+        <body>
+            <header>
+                <h1>FutureTech Foundation</h1>
+                <p>Our Commitment to Accountability & Transparency</p>
+            </header>
+            <main>
+                <p class="section-intro">
+                    At FutureTech Foundation, we believe that trust is the cornerstone of our mission. We are dedicated to operating with the utmost accountability and transparency in all aspects of our work. This commitment ensures that our donors, partners, and the communities we serve can have full confidence in our integrity and impact. Explore the principles that guide us:
+                </p>
 
-        .footer-links a:hover {
-            color: #3f51b5;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <h1>FutureTech Foundation</h1>
-        <p>Accountability & Transparency</p>
-    </header>
-    <main>
-        <h2>Our Commitment to Accountability & Transparency</h2>
-        <p>
-            Explore our policies and practices in the categories below to understand how we ensure trust, responsibility, and impact in our work.
-        </p>
+                <div class="tab-nav">
+                    <button class="tab-button active" data-tab="trust">🏛️ Trust</button>
+                    <button class="tab-button" data-tab="stewardship">💰 Stewardship</button>
+                    <button class="tab-button" data-tab="commitment">🤝 Commitment</button>
+                    <button class="tab-button" data-tab="working">👥 Collaboration</button>
+                    <button class="tab-button" data-tab="sustainability">🌱 Sustainability</button>
+                    <button class="tab-button" data-tab="improvement">🔄 Improvement</button>
+                </div>
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>1. Governance & Leadership Transparency</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>Our leadership team and Board of Directors are committed to open and transparent decision-making processes.</p>
-                <ul>
-                    <li><strong>Board Oversight:</strong> Regular meetings and active involvement in strategic decisions.</li>
-                    <li><strong>Regular Reporting:</strong> Comprehensive reports on our activities and progress shared with stakeholders.</li>
-                    <li><strong>Open Communication:</strong> We strive to maintain open channels of communication with our community.</li>
-                </ul>
-            </div>
-        </section>
+                <div id="trust" class="tab-content active">
+                    <h2 class="section-title">Foundation of Trust</h2>
+                    <p class="section-intro">
+                        We build trust through open governance, ethical conduct, and clear communication of our leadership and operational standards.
+                    </p>
+                    <ul class="policy-list">
+                        <li><strong>Board Oversight:</strong> Ensuring all decisions are made with input and oversight from our Board of Directors and stakeholders.</li>
+                        <li><strong>Regular Reporting:</strong> Providing consistent updates on our activities and progress.</li>
+                        <li><strong>Open Meetings:</strong> Where appropriate, ensuring our decision-making processes are accessible.</li>
+                        <li><strong>Code of Ethics:</strong> Adhering to a comprehensive code of conduct for all staff and volunteers.</li>
+                        <li><strong>Non-Discrimination Policy:</strong> Promoting inclusion, respect, and equal opportunity in all our activities.</li>
+                        <li><strong>Compliance with Regulations:</strong> Ensuring full compliance with all relevant legal and regulatory requirements.</li>
+                    </ul>
+                </div>
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>2. Financial Accountability</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>We are committed to providing clear and accessible information about our financial activities.</p>
-                <ul>
-                    <li><strong>Audited Financial Statements:</strong> Annual audits conducted by independent firms to ensure accuracy.</li>
-                    <li><strong>Budget Transparency:</strong> Detailed budget information available to demonstrate how funds are allocated.</li>
-                    <li><strong>Grant Tracking:</strong> Clear tracking of grants and their impact on our programs.</li>
-                </ul>
-            </div>
-        </section>
+                <div id="stewardship" class="tab-content">
+                    <h2 class="section-title">Responsible Stewardship</h2>
+                    <p class="section-intro">
+                        We manage our resources responsibly and provide clear visibility into our financial activities, ensuring your contributions are used effectively.
+                    </p>
+                    <ul class="policy-list">
+                        <li><strong>Audited Financial Statements:</strong> Conducting annual audits by independent firms to ensure accuracy and accountability.</li>
+                        <li><strong>Budget Transparency:</strong> Providing clear information on how our funds are allocated to programs and operations.</li>
+                        <li><strong>Grant Tracking:</strong> Diligently tracking grants and their specific impact on our initiatives.</li>
+                        <li><strong>Clear Objectives and KPIs:</strong> Defining well-defined goals and key performance indicators for all our programs.</li>
+                        <li><strong>Independent Evaluations:</strong> Regularly conducting evaluations by external experts to assess our effectiveness.</li>
+                        <li><strong>Impact Reports:</strong> Sharing detailed reports on the outcomes and impact of our programs.</li>
+                    </ul>
+                </div>
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>3. Data Privacy & Security</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>Protecting the privacy and security of our stakeholders' data is paramount.</p>
-                <ul>
-                    <li><strong>Data Protection Policy:</strong> Clearly defined policies for data collection, storage, and usage.</li>
-                    <li><strong>Consent-Based Data Collection:</strong> We only collect data with explicit consent.</li>
-                    <li><strong>Data Breach Transparency:</strong> Prompt notification and clear communication in the event of a data breach.</li>
-                </ul>
-            </div>
-        </section>
+                 <div id="commitment" class="tab-content">
+                    <h2 class="section-title">Our Commitment to You</h2>
+                    <p class="section-intro">
+                        We prioritize the privacy and security of your data and actively seek your feedback to continuously improve our programs and engagement.
+                    </p>
+                    <ul class="policy-list">
+                        <li><strong>Data Protection Policy:</strong> Upholding high standards for data collection, storage, and usage to protect stakeholder privacy.</li>
+                        <li><strong>Consent-Based Data Collection:</strong> Ensuring we only collect data with your explicit consent.</li>
+                        <li><strong>Data Breach Transparency:</strong> Committing to prompt notification and clear communication in the event of a data breach.</li>
+                        <li><strong>Community Feedback Channels:</strong> Providing accessible ways for the community to share their input and ask questions.</li>
+                         <li><strong>Responsive Communication:</strong> Striving to provide timely and thoughtful responses to stakeholder inquiries.</li>
+                        <li><strong>Stakeholder Reports:</strong> Regularly publishing reports summarizing stakeholder feedback and our responses.</li>
+                    </ul>
+                </div>
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>4. Stakeholder Engagement</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>We value feedback and actively engage with our stakeholders to improve our programs and impact.</p>
-                <ul>
-                    <li><strong>Community Feedback Channels:</strong> Dedicated channels for the community to provide input and ask questions.</li>
-                    <li><strong>Responsive Communication:</strong> Timely and thoughtful responses to stakeholder inquiries.</li>
-                    <li><strong>Stakeholder Reports:</strong> Regular reports summarizing stakeholder feedback and our responses.</li>
-                </ul>
-            </div>
-        </section>
+                <div id="working" class="tab-content">
+                    <h2 class="section-title">Working Together</h2>
+                    <p class="section-intro">
+                        We foster strong relationships with our partners and ensure our team is well-equipped and accountable.
+                    </p>
+                    <ul class="policy-list">
+                         <li><strong>Partner Vetting:</strong> Conducting thorough due diligence to ensure partners align with our values and standards.</li>
+                        <li><strong>Partnership Disclosure:</strong> Clearly communicating our partnerships and collaborations.</li>
+                        <li><strong>Joint Reporting:</strong> Collaborating with partners on transparent reporting of project outcomes.</li>
+                         <li><strong>Training and Development:</strong> Providing ongoing training and professional development opportunities for our staff and volunteers.</li>
+                        <li><strong>Performance Evaluations:</strong> Conducting regular performance reviews to ensure accountability and identify areas for growth.</li>
+                    </ul>
+                </div>
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>5. Ethical Standards & Compliance</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>We adhere to the highest ethical standards and all applicable regulations.</p>
-                <ul>
-                    <li><strong>Code of Ethics:</strong> A comprehensive code of conduct for all staff and volunteers.</li>
-                    <li><strong>Non-Discrimination Policy:</strong> Commitment to inclusivity and non-discrimination in all our activities.</li>
-                    <li><strong>Compliance with Regulations:</strong> Ensuring full compliance with all relevant legal and regulatory requirements.</li>
-                </ul>
-            </div>
-        </section>
+                <div id="sustainability" class="tab-content">
+                    <h2 class="section-title">Sustainable Practices</h2>
+                    <p class="section-intro">
+                        We are committed to environmentally responsible practices and transparent reporting on our sustainability efforts.
+                    </p>
+                    <ul class="policy-list">
+                        <li><strong>Sustainable Practices:</strong> Implementing environmentally friendly operational practices.</li>
+                        <li><strong>Annual Sustainability Reports:</strong> Regularly reporting on our environmental initiatives and performance.</li>
+                        <li><strong>Environmental Awareness Programs:</strong> Promoting environmental awareness within our community.</li>
+                    </ul>
+                </div>
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>6. Program Evaluation & Impact Measurement</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>We rigorously evaluate our programs to understand their impact and identify areas for improvement.</p>
-                <ul>
-                    <li><strong>Clear Objectives and KPIs:</strong> Well-defined goals and key performance indicators for all programs.</li>
-                    <li><strong>Independent Evaluations:</strong> Periodic evaluations conducted by external experts.</li>
-                    <li><strong>Impact Reports:</strong> Publicly shared reports detailing the outcomes and impact of our initiatives.</li>
-                </ul>
-            </div>
-        </section>
+                <div id="improvement" class="tab-content">
+                    <h2 class="section-title">Continuous Improvement</h2>
+                    <p class="section-intro">
+                        We are dedicated to learning and continuously improving our policies and practices based on feedback and innovation.
+                    </p>
+                    <ul class="policy-list">
+                        <li><strong>Regular Policy Reviews:</strong> Periodically reviewing and updating our policies to ensure effectiveness and relevance.</li>
+                        <li><strong>Feedback-Driven Improvements:</strong> Utilizing stakeholder feedback to inform our improvement efforts.</li>
+                         <li><strong>Transparency in Innovation:</strong> Openly sharing our approaches to innovation and learning.</li>
+                    </ul>
+                </div>
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>7. Volunteer and Staff Accountability</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>We ensure our team members are well-trained, aligned with our mission, and held accountable for their roles.</p>
-                <ul>
-                    <li><strong>Training and Development:</strong> Ongoing training to ensure our team is equipped to perform their duties effectively.</li>
-                    <li><strong>Performance Evaluations:</strong> Regular reviews to assess performance and identify areas for growth.</li>
-                    <li><strong>Code of Conduct:</strong> Clear guidelines for professional behavior and ethical conduct.</li>
-                </ul>
-            </div>
-        </section>
+                <a href="membership.html" class="cta">Join Us</a>
+            </main>
+            <footer>
+                <p>Quick Links:</p>
+                <div class="footer-links">
+                    <a href="financial-reports.html">Financial Reports</a>
+                    <a href="code-of-ethics.html">Code of Ethics</a>
+                    <a href="partnership-guidelines.html">Partnership Guidelines</a>
+                    <a href="environmental-impact.html">Environmental Impact Report</a>
+                </div>
+                <p><a href="index.html">Back to Home</a></p>
+            </footer>
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>8. Transparency in Partnerships</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>We carefully select partners who share our commitment to accountability and transparency.</p>
-                <ul>
-                    <li><strong>Partner Vetting:</strong> Due diligence to ensure partners align with our values and standards.</li>
-                    <li><strong>Partnership Disclosure:</strong> Clear disclosure of our partnerships and collaborations.</li>
-                    <li><strong>Joint Reporting:</strong> Collaborative reporting on the outcomes of joint projects.</li>
-                </ul>
-            </div>
-        </section>
+            <script>
+                const tabButtons = document.querySelectorAll('.tab-button');
+                const tabContents = document.querySelectorAll('.tab-content');
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>9. Environmental Responsibility</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>We are committed to sustainable practices and minimizing our environmental footprint.</p>
-                <ul>
-                    <li><strong>Sustainable Practices:</strong> Implementation of environmentally friendly operational practices.</li>
-                    <li><strong>Annual Sustainability Reports:</strong> Reporting on our environmental initiatives and performance.</li>
-                    <li><strong>Environmental Awareness Programs:</strong> Promoting environmental awareness within our community.</li>
-                </ul>
-            </div>
-        </section>
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Deactivate all buttons and content
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
 
-        <section class="category-block">
-            <div class="category-header">
-                <h3>10. Innovation & Continuous Improvement</h3>
-                <div class="dropdown-icon"></div>
-            </div>
-            <div class="category-content">
-                <p>We are dedicated to learning and continuously improving our policies and practices.</p>
-                <ul>
-                    <li><strong>Regular Policy Reviews:</strong> Periodic review and updates of our policies to ensure effectiveness.</li>
-                    <li><strong>Feedback-Driven Improvements:</strong> Using stakeholder feedback to inform our improvement efforts.</li>
-                    <li><strong>Transparency in Innovation:</strong> Openly sharing our approaches to innovation and learning.</li>
-                </ul>
-            </div>
-        </section>
-
-        <a href="membership.html" class="cta">Join Us</a>
-    </main>
-    <footer>
-        <p>Quick Links:</p>
-        <div class="footer-links">
-            <a href="financial-reports.html">Financial Reports</a>
-            <a href="code-of-ethics.html">Code of Ethics</a>
-            <a href="partnership-guidelines.html">Partnership Guidelines</a>
-            <a href="environmental-impact.html">Environmental Impact Report</a>
-        </div>
-        <p><a href="index.html">Back to Home</a></p>
-    </footer>
-
-    <script>
-        // Basic JavaScript to toggle the display of category content and rotate the icon
-        document.addEventListener('DOMContentLoaded', function() {
-            const categoryHeaders = document.querySelectorAll('.category-header');
-
-            categoryHeaders.forEach(header => {
-                header.addEventListener('click', function() {
-                    const content = this.nextElementSibling;
-                    const icon = this.querySelector('.dropdown-icon');
-                    this.classList.toggle('expanded'); // Add/remove 'expanded' class to the header
-                    if (content.style.display === 'block') {
-                        content.style.display = 'none';
-                    } else {
-                        content.style.display = 'block';
-                    }
+                        // Activate the clicked button and corresponding content
+                        button.classList.add('active');
+                        const tabId = button.getAttribute('data-tab');
+                        document.getElementById(tabId).classList.add('active');
+                    });
                 });
-            });
-        });
-    </script>
-</body>
-</html>
+
+                // Show the first tab by default
+                tabButtons[0].classList.add('active');
+                tabContents[0].classList.add('active');
+            </script>
+        </body>
+        </html>
